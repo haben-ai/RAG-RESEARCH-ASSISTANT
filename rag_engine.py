@@ -1,4 +1,4 @@
-from langchain_openai import ChatOpenAI
+from langchain_community.llms import Ollama
 from vector_store import load_vector_store
 from prompts import PROMPT_TEMPLATE
 
@@ -14,10 +14,11 @@ def answer_question(question):
         question=question
     )
 
-    llm = ChatOpenAI(temperature=0)
+    llm = Ollama(model="mistral")
+
     response = llm.invoke(prompt)
 
     return {
-        "answer": response.content,
-        "sources": len(docs)
+        "answer": response,
+        "sources_used": len(docs)
     }
