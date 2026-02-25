@@ -1,6 +1,6 @@
-from langchain_text_splitters import RecursiveCharacterTextSplitter
-from langchain_community.vectorstores import FAISS
-from langchain_community.embeddings import HuggingFaceEmbeddings
+from langchain.text_splitters import RecursiveCharacterTextSplitter
+from langchain.vectorstores import FAISS
+from langchain.embeddings import HuggingFaceEmbeddings
 from config import VECTOR_STORE_PATH
 import os
 
@@ -22,7 +22,6 @@ def build_vector_store(text):
     vectorstore.save_local(VECTOR_STORE_PATH)
 
     return len(docs)
-
 
 def load_vector_store():
     embeddings = HuggingFaceEmbeddings(
