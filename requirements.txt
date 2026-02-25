@@ -1,6 +1,8 @@
 flask
 langchain
 langchain-openai
+langchain-community
+langchain-text-splitters
 faiss-cpu
 openai
 tiktoken
