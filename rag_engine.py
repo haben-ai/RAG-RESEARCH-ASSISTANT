@@ -1,16 +1,13 @@
-# rag_engine.py
-
-import os
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import FAISS
-from langchain_huggingface import HuggingFaceEmbeddings
+from langchain_community.embeddings import HuggingFaceEmbeddings
 from google import genai
 from config import VECTOR_STORE_PATH
+import os
 
 # Initialize Gemini client
-client = genai.Client(api_key=os.getenv("GENAI_API_KEY"))
+client = genai.Client()
 
-# Build vector store
 def build_vector_store(text):
     os.makedirs("vectorstore", exist_ok=True)
 
@@ -27,9 +24,10 @@ def build_vector_store(text):
 
     vectorstore = FAISS.from_documents(docs, embeddings)
     vectorstore.save_local(VECTOR_STORE_PATH)
+
     return len(docs)
 
-# Load vector store
+
 def load_vector_store():
     embeddings = HuggingFaceEmbeddings(
         model_name="sentence-transformers/all-MiniLM-L6-v2"
@@ -41,21 +39,17 @@ def load_vector_store():
         allow_dangerous_deserialization=True
     )
 
-# Answer question
-def answer_question(question, vectorstore, top_k=3):
-    docs = vectorstore.similarity_search(question, k=top_k)
-    context = "\n\n".join([doc.page_content for doc in docs])
 
+def answer_question(question, vectorstore):
+    # Retrieve top relevant docs
+    docs = vectorstore.similarity_search(question, k=3)
+    context = "\n".join([d.page_content for d in docs])
+
+    # Use Gemini API to generate answer
     response = client.responses.create(
-        model="models/gemini-2.5-flash",   # valid model name
-        input=f"Use the following context to answer the question.\n\nContext:\n{context}\n\nQuestion: {question}"
+        model="gemini-1.5-t",  # Choose a valid model
+        input=f"Use the following context to answer the question:\n\nContext: {context}\n\nQuestion: {question}\nAnswer:"
     )
 
-    # Extract text
-    answer = ""
-    for block in response.output:
-        for element in block.content:
-            if element.type == "output_text":
-                answer += element.text
-
-    return answer.strip()
+    # response.output_text contains the generated text
+    return response.output_text
