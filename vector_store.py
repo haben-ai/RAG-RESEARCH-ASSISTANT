@@ -1,67 +1,60 @@
 import os
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import FAISS
 from langchain_huggingface import HuggingFaceEmbeddings
-from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain_community.document_loaders import PyPDFLoader
+from config import VECTOR_STORE_PATH
 
-DB_PATH = "faiss_index"
+
 EMBEDDING_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
 
 
 def get_embeddings():
     """
-    Loads the embedding model.
-    This should only initialize once per run.
+    Loads the HuggingFace embedding model.
+    Keeps configuration centralized.
     """
     return HuggingFaceEmbeddings(
         model_name=EMBEDDING_MODEL
     )
 
 
-def build_vector_store(pdf_path: str):
+def build_vector_store(text: str):
     """
-    Build FAISS index from a PDF and save it locally.
-    Only call this when processing a NEW paper.
+    Build and persist FAISS vector store from raw extracted text.
     """
-    print("📄 Loading PDF...")
-    loader = PyPDFLoader(pdf_path)
-    documents = loader.load()
+    os.makedirs(os.path.dirname(VECTOR_STORE_PATH), exist_ok=True)
 
-    print("✂️ Splitting text into chunks...")
-    text_splitter = RecursiveCharacterTextSplitter(
-        chunk_size=1000,
-        chunk_overlap=200
+    # 🔹 Better chunking for academic papers
+    splitter = RecursiveCharacterTextSplitter(
+        chunk_size=900,      # larger chunks = better context for research
+        chunk_overlap=150,   # smoother semantic transitions
+        separators=["\n\n", "\n", ".", " ", ""]
     )
-    docs = text_splitter.split_documents(documents)
 
-    print("🧠 Creating embeddings...")
+    docs = splitter.create_documents([text])
+
     embeddings = get_embeddings()
 
-    print("📦 Building FAISS index...")
     vectorstore = FAISS.from_documents(docs, embeddings)
+    vectorstore.save_local(VECTOR_STORE_PATH)
 
-    print("💾 Saving FAISS index locally...")
-    vectorstore.save_local(DB_PATH)
+    print(f"✅ Vector store built with {len(docs)} chunks")
 
-    print("✅ Vector store built successfully.")
-    return vectorstore
+    return len(docs)
 
 
 def load_vector_store():
     """
-    Load existing FAISS index from disk.
-    This is FAST and should be used for every question.
+    Load an existing FAISS vector store from disk.
+    This is very fast and should be used for every question.
     """
-    if not os.path.exists(DB_PATH):
+    if not os.path.exists(VECTOR_STORE_PATH):
         raise ValueError("Vector store not found. Build it first.")
 
     embeddings = get_embeddings()
 
-    print("⚡ Loading FAISS index from disk...")
-    vectorstore = FAISS.load_local(
-        DB_PATH,
+    return FAISS.load_local(
+        VECTOR_STORE_PATH,
         embeddings,
         allow_dangerous_deserialization=True
     )
-
-    return vectorstore
