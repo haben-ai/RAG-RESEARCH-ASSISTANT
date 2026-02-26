@@ -1,5 +1,8 @@
-import google.genai as genai
+from google import genai
 
-models = genai.list_models()
+client = genai.Client()
+
+# Get the list of models and their supported methods
+models = client.models.list()
 for m in models:
-    print(m.name, m.supported_methods)
+    print(m.name)
