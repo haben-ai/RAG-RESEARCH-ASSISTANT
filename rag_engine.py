@@ -1,20 +1,31 @@
-from langchain_community.llms import Ollama
+from langchain_ollama import OllamaLLM
 from vector_store import load_vector_store
-from prompts import PROMPT_TEMPLATE
 
-def answer_question(question):
+MODEL_NAME = "phi3:mini"  # lightweight and fast
+
+
+def answer_question(question: str):
     vectorstore = load_vector_store()
     retriever = vectorstore.as_retriever(search_kwargs={"k": 4})
-    docs = retriever.get_relevant_documents(question)
+
+    docs = retriever.invoke(question)
 
     context = "\n\n".join([doc.page_content for doc in docs])
 
-    prompt = PROMPT_TEMPLATE.format(
-        context=context,
-        question=question
-    )
+    prompt = f"""
+You are an academic research assistant.
+Answer the question using ONLY the context below.
 
-    llm = Ollama(model="mistral")
+Context:
+{context}
+
+Question:
+{question}
+
+Answer:
+"""
+
+    llm = OllamaLLM(model=MODEL_NAME)
 
     response = llm.invoke(prompt)
 
