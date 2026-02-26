@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>RAG + Gemini</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background: #f5f5f5; }
+        input, button, textarea { padding: 10px; margin: 10px 0; width: 100%; }
+        button { cursor: pointer; }
+        .answer { background: #fff; padding: 15px; border-radius: 8px; margin-top: 15px; }
+    </style>
+</head>
+<body>
+    <h1>RAG + Gemini</h1>
+    <div>
+        <h3>Step 1: Ingest PDF</h3>
+        <input type="text" id="pdf_url" placeholder="Enter PDF URL" />
+        <button onclick="ingestPDF()">Ingest PDF</button>
+        <p id="ingest_status"></p>
+    </div>
+    
+    <div>
+        <h3>Step 2: Ask a Question</h3>
+        <textarea id="question" placeholder="Enter your question"></textarea>
+        <button onclick="askQuestion()">Ask</button>
+        <div class="answer" id="answer"></div>
+    </div>
+
+<script>
+async function ingestPDF() {
+    const pdf_url = document.getElementById("pdf_url").value;
+    const res = await fetch("/ingest", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({pdf_url})
+    });
+    const data = await res.json();
+    document.getElementById("ingest_status").innerText = JSON.stringify(data, null, 2);
+}
+
+async function askQuestion() {
+    const question = document.getElementById("question").value;
+    const res = await fetch("/ask", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({question})
+    });
+    const data = await res.json();
+    document.getElementById("answer").innerText = data.answer || data.message;
+}
+</script>
+</body>
+</html>
