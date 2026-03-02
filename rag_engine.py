@@ -6,7 +6,7 @@ from google import genai
 from config import VECTOR_STORE_PATH
 
 
-GENAI_API_KEY = "AIzaSyDZB-8a3b1VIdXgC1kmdIKaMyoy0AK69As" #os.environ.get("GENAI_API_KEY")
+GENAI_API_KEY = os.environ.get("GENAI_API_KEY")
 if not GENAI_API_KEY:
     raise ValueError("Please set GENAI_API_KEY in your environment variables")
 
