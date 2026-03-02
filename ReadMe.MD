@@ -1,6 +1,6 @@
-RAG Research Assistant
+<h2>RAG Research Assistant </h2>
 
-
+![](https://github.com/haben-ai/RAG-RESEARCH-ASSISTANT/blob/main/rag.png)
 
 A Retrieval-Augmented Generation (RAG) based research assistant built using:
 
