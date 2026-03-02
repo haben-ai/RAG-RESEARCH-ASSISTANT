@@ -2,7 +2,7 @@
 
 ![](https://github.com/haben-ai/RAG-RESEARCH-ASSISTANT/blob/main/rag.png)
 
-A Retrieval-Augmented Generation (RAG) based research assistant built using:
+# A Retrieval-Augmented Generation (RAG) based research assistant built using:
 
 
 1. LangChain
@@ -17,35 +17,32 @@ A Retrieval-Augmented Generation (RAG) based research assistant built using:
 
 This project allows users to ask questions about research documents. It retrieves the most relevant document chunks and generates context-aware answers using Gemini.
 
-🚀 Features
+# Features
 
-Document chunking using RecursiveCharacterTextSplitter
+1. Document chunking using RecursiveCharacterTextSplitter
 
-Local embeddings using sentence-transformers/all-MiniLM-L6-v2
+2. Local embeddings using sentence-transformers/all-MiniLM-L6-v2
 
-Vector search powered by FAISS
+3. Vector search powered by FAISS
 
-Context-aware question answering using Gemini
+4. Context-aware question answering using Gemini
 
-REST API endpoint (/ask)
-
-Supports retry handling and API quota management
 
 Modular RAG architecture
 
-🧠 Architecture
+# 🧠 Architecture
 
-User Question
-↓
-FAISS Similarity Search (Top K Chunks)
-↓
-Construct Prompt with Context
-↓
-Gemini generate_content()
-↓
-Return Context-Aware Answer
+# User Question
+# ↓
+# FAISS Similarity Search (Top K Chunks)
+# ↓
+# Construct Prompt with Context
+# ↓
+# Gemini generate_content()
+# ↓
+# Return Context-Aware Answer
 
-📁 Project Structure
+# 📁 Project Structure
 RAG-RESEARCH-ASSISTANT/
 
 ![](https://github.com/haben-ai/RAG-RESEARCH-ASSISTANT/blob/main/rag-dir.png)
@@ -57,18 +54,16 @@ cd RAG-RESEARCH-ASSISTANT
 2️⃣ Create Virtual Environment
 python -m venv venv
 venv\Scripts\activate  # Windows
-# source venv/bin/activate  # Mac/Linux
+ source venv/bin/activate  # Mac/Linux
 3️⃣ Install Dependencies
 pip install -r requirements.txt
 
-If you don't have a requirements file, install:
+
 ![](https://github.com/haben-ai/RAG-RESEARCH-ASSISTANT/blob/main/RAG%202026-03-02%20174459.png)
 pip install flask langchain langchain-community langchain-text-splitters langchain-huggingface faiss-cpu sentence-transformers google-genai python-dotenv
 🔑 Setting Up Gemini API Key
 
 This project uses the Google Gemini API via google-genai.
-
-Recommended: Use .env file
 
 Create a .env file in the root directory:
 
@@ -79,7 +74,6 @@ Ensure your rag_engine.py loads it:
 from dotenv import load_dotenv
 load_dotenv()
 
-⚠️ Never commit your API key to GitHub.
 
 ▶️ Running the Project
 Start Flask Backend
