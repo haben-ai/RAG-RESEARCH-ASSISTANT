@@ -48,8 +48,8 @@ Return Context-Aware Answer
 📁 Project Structure
 RAG-RESEARCH-ASSISTANT/
 
+![](https://github.com/haben-ai/RAG-RESEARCH-ASSISTANT/blob/main/rag-dir.png)
 
-![](https://github.com/haben-ai/RAG-RESEARCH-ASSISTANT/blob/main/RAG%202026-03-02%20174459.png)
 ⚙️ Installation
 1️⃣ Clone the Repository
 git clone 
@@ -62,7 +62,7 @@ venv\Scripts\activate  # Windows
 pip install -r requirements.txt
 
 If you don't have a requirements file, install:
-
+![](https://github.com/haben-ai/RAG-RESEARCH-ASSISTANT/blob/main/RAG%202026-03-02%20174459.png)
 pip install flask langchain langchain-community langchain-text-splitters langchain-huggingface faiss-cpu sentence-transformers google-genai python-dotenv
 🔑 Setting Up Gemini API Key
 
