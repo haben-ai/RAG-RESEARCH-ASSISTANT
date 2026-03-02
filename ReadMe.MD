@@ -1,6 +1,6 @@
 RAG Research Assistant
 
-![](https://github.com/haben-ai/RAG-RESEARCH-ASSISTANT/blob/main/RAG%202026-03-02%20174459.png)
+
 
 A Retrieval-Augmented Generation (RAG) based research assistant built using:
 
@@ -56,9 +56,10 @@ RAG-RESEARCH-ASSISTANT/
 ├── vectorstore/           # Saved FAISS index
 ├── .env                   # Environment variables (API Key)
 └── README.md
+![](https://github.com/haben-ai/RAG-RESEARCH-ASSISTANT/blob/main/RAG%202026-03-02%20174459.png)
 ⚙️ Installation
 1️⃣ Clone the Repository
-git clone <your-repo-url>
+git clone 
 cd RAG-RESEARCH-ASSISTANT
 2️⃣ Create Virtual Environment
 python -m venv venv
