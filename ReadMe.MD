@@ -1,5 +1,7 @@
 RAG Research Assistant
 
+![](https://github.com/haben-ai/RAG-RESEARCH-ASSISTANT/blob/main/RAG%202026-03-02%20174459.png)
+
 A Retrieval-Augmented Generation (RAG) based research assistant built using:
 
 Flask (Backend API)
