@@ -32,21 +32,21 @@ Modular RAG architecture
 
 # 🧠 Architecture
 
-# User Question
-# ↓
-# FAISS Similarity Search (Top K Chunks)
-# ↓
-# Construct Prompt with Context
-# ↓
-# Gemini generate_content()
-# ↓
-# Return Context-Aware Answer
+ User Question
+ ↓
+ FAISS Similarity Search (Top K Chunks)
+ ↓
+ Construct Prompt with Context
+ ↓
+ Gemini generate_content()
+ ↓
+ Return Context-Aware Answer
 
 # 📁 Project Structure
 RAG-RESEARCH-ASSISTANT/
 
 ![](https://github.com/haben-ai/RAG-RESEARCH-ASSISTANT/blob/main/rag-dir.png)
-
+```
 ⚙️ Installation
 1️⃣ Clone the Repository
 git clone 
@@ -56,41 +56,26 @@ python -m venv venv
 venv\Scripts\activate  # Windows
  source venv/bin/activate  # Mac/Linux
 3️⃣ Install Dependencies
-pip install -r requirements.txt
+pip install -r requirements.txt```
 
 
 ![](https://github.com/haben-ai/RAG-RESEARCH-ASSISTANT/blob/main/RAG%202026-03-02%20174459.png)
-pip install flask langchain langchain-community langchain-text-splitters langchain-huggingface faiss-cpu sentence-transformers google-genai python-dotenv
+```
+pip install flask langchain langchain-community langchain-text-splitters langchain-huggingface faiss-cpu sentence-transformers google-genai python-dotenv ```
+```
 🔑 Setting Up Gemini API Key
 
-This project uses the Google Gemini API via google-genai.
 
-Create a .env file in the root directory:
 
 GENAI_API_KEY=your_actual_api_key_here
 
-Ensure your rag_engine.py loads it:
+
 
 from dotenv import load_dotenv
 load_dotenv()
 
 
-▶️ Running the Project
-Start Flask Backend
-python app.py
 
-Server will run at:
-
-http://127.0.0.1:5000
-Example API Request
-
-POST to /ask:
-
-{
-  "question": "What problem does the paper solve?"
-}
-Optional: Run Streamlit Frontend
-streamlit run streamlit_app.py
 🧩 How RAG Works in This Project
 1. Document Chunking
 
