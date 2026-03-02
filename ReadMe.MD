@@ -60,6 +60,7 @@ pip install -r requirements.txt```
 
 
 ![](https://github.com/haben-ai/RAG-RESEARCH-ASSISTANT/blob/main/RAG%202026-03-02%20174459.png)
+
 ```
 pip install flask langchain langchain-community langchain-text-splitters langchain-huggingface faiss-cpu sentence-transformers google-genai python-dotenv ```
 ```
