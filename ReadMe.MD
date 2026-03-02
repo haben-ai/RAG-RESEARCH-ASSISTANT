@@ -4,17 +4,16 @@
 
 A Retrieval-Augmented Generation (RAG) based research assistant built using:
 
-Flask (Backend API)
 
-LangChain
+1. LangChain
 
-FAISS Vector Store
+2. FAISS Vector Store
 
-HuggingFace Embeddings
+3. HuggingFace Embeddings
 
-Google Gemini API (google-genai SDK)
+4. Google Gemini API (google-genai SDK)
 
-Optional: Streamlit Frontend
+5. Streamlit Frontend
 
 This project allows users to ask questions about research documents. It retrieves the most relevant document chunks and generates context-aware answers using Gemini.
 
@@ -48,14 +47,8 @@ Return Context-Aware Answer
 
 📁 Project Structure
 RAG-RESEARCH-ASSISTANT/
-│
-├── app.py                 # Flask backend
-├── rag_engine.py          # RAG logic
-├── config.py              # Configurations (VECTOR_STORE_PATH)
-├── streamlit_app.py       # Optional frontend
-├── vectorstore/           # Saved FAISS index
-├── .env                   # Environment variables (API Key)
-└── README.md
+
+
 ![](https://github.com/haben-ai/RAG-RESEARCH-ASSISTANT/blob/main/RAG%202026-03-02%20174459.png)
 ⚙️ Installation
 1️⃣ Clone the Repository
