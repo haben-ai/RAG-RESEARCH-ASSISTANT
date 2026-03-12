@@ -1,4 +1,4 @@
-from langchain.text_splitter import RecursiveCharacterTextSplitter  # correct for your version
+from langchain.text_splitter import RecursiveCharacterTextSplitter  
 from langchain.vectorstores import FAISS
 from langchain_huggingface import HuggingFaceEmbeddings  # updated from deprecated langchain_community
 from config import VECTOR_STORE_PATH

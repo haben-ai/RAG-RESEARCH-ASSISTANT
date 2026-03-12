@@ -12,7 +12,6 @@ def ask():
     question = data.get("question")
 
     if not vectorstore:
-        # For now, dummy text from paper; in real use, download PDF and extract text
         text = "Insert extracted paper text here..."
         build_vector_store(text)
         vectorstore = load_vector_store()
