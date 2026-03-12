@@ -3,6 +3,7 @@ import requests
 from pypdf import PdfReader
 from config import DATA_PATH
 
+
 def download_pdf(url):
     os.makedirs(DATA_PATH, exist_ok=True)
     response = requests.get(url)
